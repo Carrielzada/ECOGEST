@@ -52,11 +52,11 @@ CREATE TABLE `cadastrotiposdeservico` (
 -- Inserção de dados na tabela cadastrotiposdeservico
 INSERT INTO `cadastrotiposdeservico` (`id`, `nome`) VALUES
 (1, 'Realizar Poda e Remoção de plantas'),
-(3, 'Liberação de mudas de árvores para beneficiários'),
-(4, 'Medição e análise da qualidade do ar'),
-(5, 'Implementação de medidas contra erosão do solo'),
-(6, 'Monitoramento de recursos hídricos'),
-(7, 'Conservação e manutenção de áreas verdes');
+(2, 'Liberação de mudas de árvores para beneficiários'),
+(3, 'Medição e análise da qualidade do ar'),
+(4, 'Implementação de medidas contra erosão do solo'),
+(5, 'Monitoramento de recursos hídricos'),
+(6, 'Conservação e manutenção de áreas verdes');
 
 -- Tabela cadtipoativsust
 DROP TABLE IF EXISTS `cadtipoativsust`;
@@ -224,7 +224,7 @@ CREATE TABLE `realizaragserv` (
 INSERT INTO `realizaragserv` VALUES 
 (1,'Carlos Eduardo','12345678901','(11) 91234-5678','Rua Exemplo, 123','Centro',45,1,'2024-10-20','09:00:00','Serviço de poda de árvores em área pública', 'Pendente'),
 (2,'Ana Maria','98765432100','(22) 98765-4321','Av. Brasil, 321','Zona Sul',100,3,'2024-10-21','10:00:00','Liberação de mudas de árvores para comunidade', 'Em Andamento'),
-(3,'Roberto Silva','11122233344','(33) 99999-8888','Rua das Flores, 789','Jardim Primavera',120,4,'2024-10-22','11:30:00','Medição e análise da qualidade do ar em área industrial', 'Concluído');
+(3,'Roberto Silva','11122233344','(33) 99999-8888','Rua das Flores, 789','Jardim Primavera',120,2,'2024-10-22','11:30:00','Medição e análise da qualidade do ar em área industrial', 'Concluído');
 
 -- Tabela historico_servico (para registrar histórico de alterações de status)
 DROP TABLE IF EXISTS `historico_servico`;
@@ -245,3 +245,51 @@ INSERT INTO `historico_servico` (`servico_id`, `status`, `alterado_por`) VALUES
 (2, 'Pendente', 'Carlos Eduardo');
 
 
+-- Criação das tabelas de secretaria e tramitação de serviços agendados, juntamente com suas inserções:
+DROP TABLE IF EXISTS `secretaria`;
+CREATE TABLE secretaria(
+    id INT NOT NULL AUTO_INCREMENT,
+    nome_secretaria varchar(100) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+-- Exemplo de inserção de dados para teste
+LOCK TABLE `secretaria` WRITE;
+INSERT INTO `secretaria` VALUES 
+(1,'Secretaria de Meio Ambiente'), 
+(2,'Secretaria de Governo'), 
+(3,'Secretaria de Obras'), 
+(4,'Secretaria de Serviços Municipais'),
+(5,'Secretaria de Turismo');
+UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `tramitarserv`;
+CREATE TABLE tramitarserv (
+    id INT NOT NULL AUTO_INCREMENT,
+    id_tiposervico INT NOT NULL,
+    id_secretaria INT NOT NULL,
+    msg_motivo TEXT NOT NULL,
+    data_tramitacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(50) NOT NULL DEFAULT 'Em Análise',
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_tiposervico) REFERENCES cadastrotiposdeservico(id),
+    FOREIGN KEY (id_secretaria) REFERENCES secretaria(id)
+);
+
+-- Trigger necessária!
+DELIMITER //
+CREATE TRIGGER after_tramitarserv_insert
+AFTER INSERT ON tramitarserv
+FOR EACH ROW
+BEGIN
+    UPDATE realizaragserv 
+    SET agserv_status = NEW.status
+    WHERE agserv_tipoServico_id = NEW.id_tiposervico;
+END //
+DELIMITER ;
+
+
+INSERT INTO tramitarserv (id_tiposervico, id_secretaria, msg_motivo) VALUES
+(1, 1, 'Encaminhando para análise inicial'),
+(3, 2, 'Transferindo para setor responsável'),
+(2, 3, 'Necessita de equipamentos especiais');
