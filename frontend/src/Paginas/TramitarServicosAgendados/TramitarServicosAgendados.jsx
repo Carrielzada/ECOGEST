@@ -23,6 +23,8 @@ function TramitarServicosAgendados() {
   const [termoPesquisa, setTermoPesquisa] = useState('');
   const [tramitacoesFiltradas, setTramitacoesFiltradas] = useState([]);
   const [idEdicao, setIdEdicao] = useState(null);
+  const [agendamentoSelectRef, setAgendamentoSelectRef] = useState(null);
+  const [secretariaSelectRef, setSecretariaSelectRef] = useState(null);
 
   function formatCPF(cpf) {
     if (!cpf) return ''; // Verifica se o CPF é válido
@@ -113,7 +115,6 @@ function TramitarServicosAgendados() {
     }
     try {
       if (idEdicao) {
-        // Atualiza uma tramitação existente
         await tramitarServicoService.atualizar(idEdicao, {
           id_servico: idAgendamento,
           id_secretaria: idSecretaria,
@@ -122,7 +123,6 @@ function TramitarServicosAgendados() {
         });
         setSucessoMensagem('Tramitação atualizada com sucesso!');
       } else {
-        // Cria uma nova tramitação
         await tramitarServicoService.adicionar({
           id_servico: idAgendamento,
           id_secretaria: idSecretaria,
@@ -138,6 +138,23 @@ function TramitarServicosAgendados() {
     limparMensagens();
   };
 
+  const limparCampos = () => {
+    setIdAgendamento('');
+    setIdSecretaria('');
+    setMsgMotivo('');
+    setIdEdicao(null);
+  
+  if (agendamentoSelectRef) {
+    agendamentoSelectRef.clearValue();
+  }
+  if (agendamentoSelectRef) {
+    agendamentoSelectRef.clearValue();
+  }
+  if (secretariaSelectRef) {
+    secretariaSelectRef.clearValue();
+  }
+  };
+
   const carregarTramitacoes = async () => {
     try {
       const dados = await tramitarServicoService.obterTodos();
@@ -146,13 +163,6 @@ function TramitarServicosAgendados() {
       setErro('Erro ao carregar tramitações.');
       limparMensagens();
     }
-  };
-
-  const limparCampos = () => {
-    setIdAgendamento('');
-    setIdSecretaria('');
-    setMsgMotivo('');
-    setIdEdicao(null);
   };
 
   useEffect(() => {
