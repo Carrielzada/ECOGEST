@@ -1,5 +1,6 @@
 -- FrontEndGrupo
 npm i react-router-dom
+npm i react-select
 
 -- BackEndGrupo
 npm i express --save
