@@ -234,18 +234,40 @@ function TramitarServicosAgendados() {
                 </Col>
               </Row>
 
-              <Row>
-                <Col lg={2}>
-                  <Button
-                    variant="primary"
-                    onClick={handleSalvarTramitacao}
-                    className="w-100"
-                  >
-                    <FaSave /> Salvar Tramitação
-                  </Button>
-                </Col>
+              <Row className="align-items-center d-md-flex justify-content-md-center">
+              <Col lg={2} className="me-2">
+              <Button
+                    variant="success"
+                          onClick={handleSalvarTramitacao}
+                          className="w-100"
+                          disabled={idEdicao !== null}>
+      <FaSave /> Salvar
+    </Button>
+  </Col>
+  <Col lg={2} className="me-2">
+    <Button
+      variant="warning"
+      onClick={handleSalvarTramitacao}
+      className="w-100"
+      disabled={idEdicao === null}
+    >
+      <FaEdit /> Atualizar
+    </Button>
+  </Col>
+  <Col lg={2}>
+    <Button
+      variant="secondary"
+      onClick={() => {
+        limparCampos();
+        setIdEdicao(null);
+      }}
+      className="w-100"
+      disabled={idEdicao === null}
+    >
+      Cancelar
+    </Button>
+  </Col>
               </Row>
-
               {sucessoMensagem && (
                 <Alert variant="success" className="mt-3">
                   {sucessoMensagem}
