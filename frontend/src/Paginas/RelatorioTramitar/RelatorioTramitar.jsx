@@ -20,11 +20,13 @@ function RelatorioTramitar() {
         setTermoBusca('');
     };
 
+
+    
     return (
         <>
             <div className="bg-white p-0 rounded shadow w-100" style={{ minHeight: '90vh' }}>
                 <h2 className="text-center mb-4 fs-3">
-                    <FaListAlt /> RELATÓRIO DE SERVIÇOS
+                    <FaListAlt /> RELATÓRIO DE SERVIÇOS TRAMITADOS
                 </h2>
                 <Container className="mt-2">
                     <Card>

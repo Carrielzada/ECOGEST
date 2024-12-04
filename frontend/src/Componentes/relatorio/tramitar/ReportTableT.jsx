@@ -19,6 +19,11 @@ const ReportTableT = forwardRef((_, ref) => {
         fetchRelatorioTramitar();
       }, []);
 
+      function formatCPF(cpf) {
+        if (!cpf) return ''; // Verifica se o CPF é válido
+        return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+      }
+
 return (
    
     <Table ref={ref} >
@@ -39,7 +44,7 @@ return (
             <td>{tramitarserv.id}</td>
             <td>{new Date(tramitarserv.data_tramitacao).toLocaleDateString()}</td>
             <td>{tramitarserv.nomeSolicitante}</td>
-            <td>{tramitarserv.cpfSolicitante}</td>
+            <td>{tramitarserv.cpfSolicitante ? formatCPF(tramitarserv.cpfSolicitante) : '-'}</td>
             <td>{tramitarserv.status}</td>
             <td>{tramitarserv.tipo_servico}</td>
             <td>{tramitarserv.nome_secretaria}</td>

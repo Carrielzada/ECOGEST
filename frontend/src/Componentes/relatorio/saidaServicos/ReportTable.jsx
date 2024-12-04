@@ -20,6 +20,11 @@ const ReportTable = forwardRef((_, ref) => {
         fetchRelatioCiclo();
       }, []);
 
+      function formatCPF(cpf) {
+        if (!cpf) return ''; // Verifica se o CPF é válido
+        return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+      }
+
 return (
    
     <Table ref={ref} >
@@ -39,7 +44,7 @@ return (
             <td>{realizaragserv.agserv_id}</td>
             <td>{new Date(realizaragserv.agserv_data).toLocaleDateString()}</td>
             <td>{realizaragserv.agserv_nomeSolicitante}</td>
-            <td>{realizaragserv.agserv_cpfSolicitante}</td>
+            <td>{realizaragserv.agserv_cpfSolicitante ? formatCPF(realizaragserv.agserv_cpfSolicitante) : '-'}</td>
             <td>{realizaragserv.agserv_status}</td>
             <td>{realizaragserv.tipo_servico}</td>
           </tr>
