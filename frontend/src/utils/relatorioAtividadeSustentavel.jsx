@@ -13,3 +13,5 @@ export const processarDadosGraficoPorAtiv = (servicos) => {
   
     return { labels, data };
   };
+
+  

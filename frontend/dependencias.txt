@@ -3,6 +3,7 @@ npm i react-router-dom
 npm i react-select
 npm i jspdf
 npm i xlsx
+npm i html2canvas
 
 -- BackEndGrupo
 npm i express --save

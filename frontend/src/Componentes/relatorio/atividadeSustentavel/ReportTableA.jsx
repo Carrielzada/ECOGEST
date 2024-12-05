@@ -32,17 +32,19 @@ return (
           <th>Data da Atividade</th>
           <th>Nome do Solicitante</th>
           <th>CPF do Solicitante</th>
+          <th>Atividade</th>
           <th>Descrição</th>
         </tr>
       </thead>
       <tbody>
         {relatorioAtividade.map((criarativi) => (
-          <tr key={criarativi.id}>
-            <td>{criarativi.id}</td>
+          <tr key={criarativi.criar_id}>
+            <td>{criarativi.criar_id}</td>
             <td>{new Date(criarativi.criar_data).toLocaleDateString()}</td>
             <td>{criarativi.criar_nome}</td>
             <td>{criarativi.criar_cpf ? formatCPF(criarativi.criar_cpf) : '-'}</td>
-            <td>{criarativi.criar_descrição}</td>
+            <td>{criarativi.tipo_atividade}</td>
+            <td>{criarativi.criar_descricao}</td>
           </tr>
         ))}
       </tbody>
