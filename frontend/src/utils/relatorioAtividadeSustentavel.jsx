@@ -1,17 +1,13 @@
-export const processarDadosGraficoPorAtiv = (servicos) => {
-    const dadosPorAtividade = {};
-  
-    servicos.forEach((servico) => {
-      const ativ = servico.id;
-      if (ativ) {
-        dadosPorAtividade[ativ] = (dadosPorAtividade[ativ] || 0) + 1;
-      }
-    });
-  
-    const labels = Object.keys(dadosPorAtividade);
-    const data = Object.values(dadosPorAtividade);
-  
-    return { labels, data };
-  };
+export const processarDadosGraficoPorAtiv = (dados) => {
+  const atividadesContagem = {};
 
-  
+  dados.forEach((atividade) => {
+    const tipo = atividade.tipo_atividade;
+    atividadesContagem[tipo] = (atividadesContagem[tipo] || 0) + 1;
+  });
+
+  const labels = Object.keys(atividadesContagem);
+  const data = Object.values(atividadesContagem);
+
+  return { labels, data };
+};

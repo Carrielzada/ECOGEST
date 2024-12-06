@@ -23,7 +23,6 @@ const DashboardA = () => {
 
   return (
     <div>
-      <h1>Dashboard</h1>
       <ChartBarA
         labels={chartData.labels}
         data={chartData.data}

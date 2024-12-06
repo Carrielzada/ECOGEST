@@ -27,6 +27,14 @@ const ChartBarA = ({ labels, data, label }) => {
         text: 'Quantidade de Atividades Sustentáveis',
       },
     },
+    scales: {
+      y: {
+        ticks: {
+          beginAtZero: true, 
+          stepSize: 1,        
+        },
+      },
+    },
   };
 
   return <Bar data={chartData} options={options} />;

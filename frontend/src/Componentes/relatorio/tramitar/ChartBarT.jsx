@@ -27,6 +27,17 @@ const ChartBarT = ({ labels, data, label }) => {
         text: 'Distribuição de Serviços por Secretaria',
       },
     },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          stepSize: 1,  // Garante números inteiros no eixo Y
+          callback: function(value) {
+            return value % 1 === 0 ? value : '';  // Mostra apenas números inteiros
+          },
+        },
+      },
+    },
   };
 
   return <Bar data={chartData} options={options} />;

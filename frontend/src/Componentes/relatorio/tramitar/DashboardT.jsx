@@ -24,7 +24,6 @@ const DashboardT = () => {
 
   return (
     <div>
-      <h1>Dashboard</h1>
       <ChartBarT
         labels={chartData.labels}
         data={chartData.data}
