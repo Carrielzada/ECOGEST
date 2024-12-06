@@ -82,7 +82,6 @@ function RelatorioAtividades() {
                         </Card.Header>
                         <Card.Body>
                             <TableExportButtons tableRef={tableRef} />
-                            <h3 className="text-center mt-4">Tabela de Relatório</h3>
                             <ReportTableA dados={dadosFiltrados} ref={tableRef} />
                             {dadosFiltrados.length === 0 && termoBusca && (
                                 <div className="text-center mt-3 text-muted">

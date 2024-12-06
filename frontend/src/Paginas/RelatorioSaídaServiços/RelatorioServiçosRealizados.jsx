@@ -43,11 +43,9 @@ function ModeloRelatorio() {
             <Container className="mt-2">
                 <Card>
                     <Card.Header as="h5">
-                    <Card className="mt-4">
-                    <Card.Body>
+                    <Card>
                         <Dashboard />
-                    </Card.Body>
-                </Card>
+                        </Card>
                         <Row className="align-items-center">
                             <Col lg={2}>Pesquisar:</Col>
                             <Col lg={6}>
