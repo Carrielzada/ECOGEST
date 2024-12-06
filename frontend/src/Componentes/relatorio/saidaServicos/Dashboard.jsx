@@ -13,10 +13,8 @@ function Dashboard() {
   useEffect(() => {
     const carregarDadosServicos = async () => {
       try {
-        // Obtém todos os serviços
-        const todosServicos = await GerenciarCicloServService.obterTodos();
         
-        // Processa os dados para o gráfico
+        const todosServicos = await GerenciarCicloServService.obterTodos();
         const dadosGrafico = processarDadosGraficoPorMes(todosServicos);
         
         setServicosPorMes(dadosGrafico);

@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 
 const ReportTableA = forwardRef(({ dados }, ref) => {
     function formatCPF(cpf) {
-        if (!cpf) return ''; // Verifica se o CPF é válido
+        if (!cpf) return '';
         return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
     }
 

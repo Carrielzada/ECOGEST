@@ -35,9 +35,9 @@ const ChartBarComponent = ({
       y: {
         beginAtZero: true,
         ticks: {
-          stepSize: 1,  // Garante números inteiros no eixo Y
+          stepSize: 1,
           callback: function(value) {
-            return value % 1 === 0 ? value : '';  // Mostra apenas números inteiros
+            return value % 1 === 0 ? value : '';
           },
         },
       },

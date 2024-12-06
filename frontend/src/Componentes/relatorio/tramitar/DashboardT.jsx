@@ -10,8 +10,6 @@ const DashboardT = () => {
       try {
         const response = await fetch('http://localhost:3001/tramitarserv/');
         const servicos = await response.json();
-
-        // Processar os dados para o gráfico
         const dadosProcessados = processarDadosGraficoPorSec(servicos);
         setChartData(dadosProcessados);
       } catch (error) {

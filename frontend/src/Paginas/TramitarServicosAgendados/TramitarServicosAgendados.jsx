@@ -79,13 +79,11 @@ function TramitarServicosAgendados() {
   const carregarTramitacaoParaEdicao = (tramitacao) => {
     setIdEdicao(tramitacao.id);
   
-    // Encontrar o valor correto na lista de opções para "idAgendamento"
     const agendamentoSelecionado = listaTramitacoes.find(
       (op) => op.id === tramitacao.id_tiposervico
     );
     setIdAgendamento(agendamentoSelecionado ? agendamentoSelecionado.id : '');
   
-    // Encontrar o valor correto na lista de opções para "idSecretaria"
     const secretariaSelecionada = listaTramitacoes.find(
       (op) => op.id_secretaria === tramitacao.id_secretaria
     );

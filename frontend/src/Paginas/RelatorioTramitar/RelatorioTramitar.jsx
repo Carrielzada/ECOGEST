@@ -84,7 +84,6 @@ function RelatorioTramitar() {
                                     </Col>
                                 </Row>
                             </Card.Header>
-
                             <TableExportButtons tableRef={tableRef} />
                             <ReportTableT dados={dadosFiltrados} ref={tableRef} />
                             {dadosFiltrados.length === 0 && termoBusca && (

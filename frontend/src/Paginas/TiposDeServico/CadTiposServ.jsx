@@ -7,9 +7,6 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import ServicoService from '../../services/ServicoService.js';
 const servicoService = new ServicoService();
 
-
-
-
 function CadTiposServ() {
     const [listaServicos, setListaServicos] = useState(null);
     const [sucessoMensagem, setSucessoMensagem] = useState('');
