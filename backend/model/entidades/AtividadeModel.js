@@ -35,7 +35,6 @@ class AtividadeModel {
         const atividades = await database.ExecutaComando('select * from cadtipoativsust where nome like ?', [`%${termoBusca}%`])
         return atividades;
     }
-
 }
 
 module.exports = AtividadeModel;
