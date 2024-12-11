@@ -9,8 +9,9 @@ import {
   Alert,
   Table,
   FormLabel,
+  Modal,
 } from "react-bootstrap";
-import { FaListAlt, FaTrash, FaEdit, FaSearch } from "react-icons/fa";
+import { FaListAlt, FaTrash, FaEdit, FaSearch, FaQuestionCircle} from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import AtivSustService from "../../services/AtivSustService.js";
 import CaixaSelecao from "../../Componentes/CaixaSelecaoTipoAtividade.jsx";
@@ -46,15 +47,19 @@ function CriarAtivSust() {
   });
 
   const [listaAtividades, setListaAtividades] = useState(null);
-  const [tiposAtividades, setTiposAtividades] = useState([]); // Estado para armazenar os tipos de atividades
+  const [tiposAtividades, setTiposAtividades] = useState([]); 
   const [sucessoMensagem, setSucessoMensagem] = useState("");
   const [erro, setErro] = useState("");
-  const [searchName, setSearchName] = useState(""); // Estado para o campo de busca
-  const [mostrarTabela, setMostrarTabela] = useState(false); // Controla exibição da tabela filtrada
+  const [searchName, setSearchName] = useState(""); 
+  const [mostrarTabela, setMostrarTabela] = useState(false); 
   const navigate = useNavigate();
-  const { idAtivSust } = useParams(); // Obtém o ID da atividade da URL
+  const { idAtivSust } = useParams(); 
   const [errors, setErrors] = useState({});
   const [validated, setValidated] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(false);
+
+  const handleShowTutorial = () => setShowTutorial(true);
+  const handleCloseTutorial = () => setShowTutorial(false);
 
   const handleSelecaoAtividade = (atividadeSelecionada) => {
     setAtividade((prevAtividade) => ({
@@ -245,10 +250,19 @@ function CriarAtivSust() {
 
   return (
     <div className="bg-white p-0 rounded shadow w-100" style={{ minHeight: "90vh" }}>
-      <h2 className="text-center mb-4 fs-3">
-        <FaListAlt /> CRIAR ATIVIDADE SUSTENTÁVEL
-      </h2>
-
+      <h2 className="d-flex justify-content-between align-items-center mb-4 fs-3">
+        <span className="mx-auto text-center">
+          <FaListAlt /> CRIAR ATIVIDADE SUSTENTÁVEL
+        </span>
+        <span>
+          <FaQuestionCircle
+            className="fs-4 me-3"
+            style={{ cursor: 'pointer', marginLeft: 'auto' }}
+            onClick={handleShowTutorial}
+            title="Ajuda"
+          />
+        </span>
+      </h2>
       <Container className="mt-2">
         <Card>
           <Card.Header as="h5">Informações do Solicitante</Card.Header>
@@ -564,9 +578,64 @@ function CriarAtivSust() {
           </Card.Body>
         </Card>
       </Container>
+      <Modal
+        show={showTutorial}
+        onHide={handleCloseTutorial}
+        size="lg"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Tutorial: Como Criar, Atualizar ou Excluir uma Atividade Sustentável</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <ol>
+            <li>
+              <strong>Nome:</strong> Preencha o nome completo do solicitante no campo <span className="text-primary">"Nome"</span>.
+            </li>
+            <li>
+              <strong>CPF:</strong> Insira o CPF do solicitante no campo <span className="text-primary">"CPF"</span>.
+            </li>
+            <li>
+              <strong>Contato:</strong> Informe um número de contato válido no campo <span className="text-primary">"Contato"</span>.
+            </li>
+            <li>
+              <strong>Local da Atividade:</strong> Preencha os campos <span className="text-primary">"Endereço"</span>, <span className="text-primary">"Bairro"</span> e <span className="text-primary">"Número"</span> indicando onde a atividade será realizada.
+            </li>
+            <li>
+              <strong>Tipo de Atividade:</strong> Selecione o tipo de atividade sustentável desejada na caixa de seleção <span className="text-primary">"Tipo de Atividade"</span>.
+            </li>
+            <li>
+              <strong>Data e Horários:</strong> Escolha a data no campo <span className="text-primary">"Data"</span> e preencha os horários de início e término nos campos <span className="text-primary">"Horário Inicial"</span> e <span className="text-primary">"Horário Final"</span>.
+            </li>
+            <li>
+              <strong>Descrição Completa:</strong> Adicione uma descrição detalhada no campo <span className="text-primary">"Descrição Completa da Atividade"</span>.
+            </li>
+            <li>
+              <strong>Cadastrar:</strong> Clique no botão <Button variant="success" size="sm">Cadastrar</Button> para salvar a atividade.
+            </li>
+            <li>
+              <strong>Atualizar:</strong> Para editar uma atividade existente:
+              <ol type="a" className="mt-2">
+                <li>Clique no ícone <FaEdit className="text-primary" /> na lista de atividades.</li>
+                <li>Atualize os campos desejados.</li>
+                <li>Clique no botão <Button variant="warning" size="sm">Atualizar</Button> para salvar as alterações.</li>
+              </ol>
+            </li>
+          </ol>
+          <img
+            src="/01.jpg"
+            alt="Tutorial de Criação de Atividade Sustentável"
+            className="img-fluid rounded shadow mt-3"
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseTutorial}>
+            Fechar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
 
 export default CriarAtivSust;
-

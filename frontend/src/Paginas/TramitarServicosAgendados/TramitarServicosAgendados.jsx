@@ -171,7 +171,7 @@ function TramitarServicosAgendados() {
 
   const opcoesAgendamento = listaAgendamentos.map((ag) => ({
     value: ag.agserv_id,
-    label: `${ag.agserv_nomeSolicitante} - ${ag.agserv_descricao}`,
+    label: `${ag.agserv_nomeSolicitante} - ${ag.tipo_servico}`,
   }));
 
   const opcoesSecretaria = listaSecretarias.map((sec) => ({

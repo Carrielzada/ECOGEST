@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './NavBar.css';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { FaClipboardList, FaRegUser, FaUserPlus, FaBars, FaHome, FaTractor, FaCogs, FaSignOutAlt, FaRegClone, FaTasks, FaExchangeAlt, FaQuestionCircle } from 'react-icons/fa';
+import { FaClipboardList, FaRegUser, FaUserPlus, FaBars, FaHome, FaTractor, FaCogs, FaSignOutAlt, FaRegClone, FaTasks, FaExchangeAlt } from 'react-icons/fa';
 import { Container } from 'react-bootstrap';
 import Footer from '../Componentes/Footer.jsx';
 import { useNavigate } from 'react-router-dom';
@@ -205,16 +205,6 @@ function NavBar() {
                                 <Link to="/update-role">
                                     <FaUserPlus />
                                     <span className="mx-2">Alterar Nível de Acesso</span>
-                                </Link>
-                            </li>
-                        )}
-                    </li>
-                    <li>
-                        {(isAdmin() || isDirector() || isColab()) && (
-                            <li className="nav-link px-2 py-3 fs-6">
-                                <Link to="/tutorial">
-                                    <FaQuestionCircle />
-                                    <span className="mx-2">Tutorial</span>
                                 </Link>
                             </li>
                         )}
